@@ -24,16 +24,29 @@ while True:
 
             else:
                 if green_light_seconds > 0:
-                    car_rest = queue_of_cars[0][:green_light_seconds]
+                    free_window_attend = queue_of_cars[0][green_light_seconds:]
 
-                    if len(car_rest) <= free_window:
+                    green_light_seconds = 0
+
+                    if len(free_window_attend) <= free_window:
                         total_cars_passed += 1
+
+                        queue_of_cars.popleft()
+
                     else:
-                        result = car_rest[:free_window]
+                        crash = free_window_attend[free_window:]
+
                         print('A crash happened!')
-                        print(f'{queue_of_cars[0]} was hit at {result[0]}.')
+                        print(f'{queue_of_cars.popleft()} was hit at {crash[0]}.')
+
+                        exit()
+                else:
+                    break
 
             if not queue_of_cars:
                 green_light_seconds = copy
+    else:
+        queue_of_cars.append(car)
 
-    queue_of_cars.append(car)
+print('Everyone is safe.')
+print(f'{total_cars_passed} total cars passed the crossroads.')
