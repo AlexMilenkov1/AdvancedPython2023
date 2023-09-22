@@ -22,29 +22,29 @@ while True:
 
                 queue_of_cars.popleft()
 
-            else:
-                if green_light_seconds > 0:
-                    free_window_attend = queue_of_cars[0][green_light_seconds:]
+            elif green_light_seconds > 0:
+                free_window_attend = queue_of_cars[0][green_light_seconds:]
 
-                    green_light_seconds = 0
+                green_light_seconds = 0
 
-                    if len(free_window_attend) <= free_window:
-                        total_cars_passed += 1
+                if len(free_window_attend) <= free_window:
+                    total_cars_passed += 1
 
-                        queue_of_cars.popleft()
+                    queue_of_cars.popleft()
 
-                    else:
-                        crash = free_window_attend[free_window:]
-
-                        print('A crash happened!')
-                        print(f'{queue_of_cars.popleft()} was hit at {crash[0]}.')
-
-                        exit()
                 else:
-                    break
+                    crash = free_window_attend[free_window:]
 
-            if not queue_of_cars:
-                green_light_seconds = copy
+                    print('A crash happened!')
+                    print(f'{queue_of_cars.popleft()} was hit at {crash[0]}.')
+
+                    exit()
+            else:
+                queue_of_cars.clear()
+                break
+
+        if not queue_of_cars:
+            green_light_seconds = copy
     else:
         queue_of_cars.append(car)
 
