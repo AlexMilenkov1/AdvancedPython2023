@@ -22,7 +22,7 @@ directions = {'up': (-1, 0), 'down': (1, 0), 'left': (0, -1), 'right': (0, 1)}
 while pieces_of_cheese > 0:
     direction = input()
 
-    if direction == 'danger' and pieces_of_cheese > 0:
+    if direction == 'danger':
         print("Mouse will come back later!")
         break
 
@@ -30,6 +30,9 @@ while pieces_of_cheese > 0:
     new_col = directions[direction][1] + mouse_pos[1]
 
     if 0 <= new_row < rows and 0 <= new_col < cols:
+        if matrix[new_row][new_col] == '@':
+            continue
+
         matrix[mouse_pos[0]][mouse_pos[1]] = '*'
 
         if matrix[new_row][new_col] == 'C':
@@ -43,9 +46,6 @@ while pieces_of_cheese > 0:
             matrix[new_row][new_col] = 'M'
             mouse_pos = [new_row, new_col]
             break
-
-        elif matrix[new_row][new_col] == '@':
-            continue
 
         elif matrix[new_row][new_col] == '*':
             mouse_pos = [new_row, new_col]
