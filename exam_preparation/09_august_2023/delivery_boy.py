@@ -16,7 +16,7 @@ for row in range(rows):
             starting_pos = [row, col]
 
 directions = {'up': (-1, 0), 'down': (1, 0), 'left': (0, -1), 'right': (0, 1)}
-
+is_delivered = False
 
 while True:
     direction = input()
@@ -29,15 +29,25 @@ while True:
             matrix[updated_row][updated_col] = 'R'
             print("Pizza is collected. 10 minutes for delivery.")
             boy_position = [updated_row, updated_col]
-        elif matrix[updated_row][updated_col] == 'A':
+            is_delivered = True
+
+        elif matrix[updated_row][updated_col] == '*':
+            continue
+
+        elif matrix[updated_row][updated_col] == 'A' and is_delivered:
             matrix[updated_row][updated_col] = 'P'
             print("Pizza is delivered on time! Next order...")
             break
+
         elif matrix[updated_row][updated_col] == '-':
             matrix[updated_row][updated_col] = '.'
             boy_position = [updated_row, updated_col]
-        elif matrix[updated_row][updated_col] == '*':
-            continue
+
+        elif matrix[updated_row][updated_col] == '.':
+            boy_position = [updated_row, updated_col]
+
+        elif matrix[updated_row][updated_col] == 'B':
+            boy_position = [updated_row, updated_col]
 
     else:
         print("The delivery is late. Order is canceled.")
