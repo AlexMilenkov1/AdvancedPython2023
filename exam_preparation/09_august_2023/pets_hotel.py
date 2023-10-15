@@ -1,8 +1,6 @@
 def accommodate_new_pets(available_capacity, max_weight_per_pet, *args):
     accommodation = {}
-
     successfully_accommodation = True
-
     result = []
 
     for info in args:
@@ -39,4 +37,3 @@ print(accommodate_new_pets(
     ("cat", 5.8),
     ("cat", 2.7),
 ))
-
